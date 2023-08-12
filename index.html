@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculatrice PGCD et PPCM</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Calculatrice PGCD et PPCM</h1>
+    <form id="calculator-form">
+        <div id="content">
+            <img src="unnamed.jpg" alt="">
+            <label for="num1">Entrez le premier nombre :</label>
+            <input type="number" id="num1" name="num1" required><br>
+            
+            <label for="num2">Entrez le deuxième nombre :</label>
+            <input type="number" id="num2" name="num2" required><br>
+            
+            <button type="button" onclick="calculate()">Calculer</button>
+            <h6>By Ramla Jamoussi</h6>
+        </div>
+       
+    </form>
+
+    <div id="results" style="display: none;">
+        <p id="pgcd"></p>
+        <p id="ppcm"></p>
+    </div>
+
+    <script>
+        function calculate() {
+            var num1 = parseInt(document.getElementById("num1").value);
+            var num2 = parseInt(document.getElementById("num2").value);
+
+            var a = num1, b = num2;
+            while (b) {
+                var temp = b;
+                b = a % b;
+                a = temp;
+            }
+
+            var pgcd, ppcm;
+            if (num1 === 0 && num2 === 0) {
+                pgcd = "Indéfini (les deux nombres sont égaux à zéro)";
+                ppcm = "Indéfini (les deux nombres sont égaux à zéro)";
+            } else if (num1 === 0) {
+                pgcd = num2;
+                ppcm = 0;
+            } else if (num2 === 0) {
+                pgcd = num1;
+                ppcm = 0;
+            } else {
+                pgcd = a;
+                ppcm = (num1 * num2) / a;
+            }
+
+            document.getElementById("pgcd").innerText = "Le Plus Grand Commun Diviseur (PGCD) : " + pgcd;
+            document.getElementById("ppcm").innerText = "Le Plus Petit Commun Multiple (PPCM) : " + ppcm;
+            
+            document.getElementById("results").style.display = "block";
+        }
+    </script>
+</body>
+</html>
